@@ -1,9 +1,12 @@
 package com.lojagames.lojadegames.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -24,7 +27,18 @@ public class Categoria {
 	@Size(min = 5, max = 100, message = "O atributo de conter no minimo 5 e no maximo 100 caracteres")
 	private String genero;
 	
+	@ManyToOne
+	@JsonIgnoreProperties("categoria")
+	private Produto produto;
 	
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
 	public Long getId() {
 		return id;
 	}
